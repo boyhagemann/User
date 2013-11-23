@@ -1,6 +1,7 @@
 <?php namespace Boyhagemann\User;
 
 use Illuminate\Support\ServiceProvider;
+use Route;
 
 class UserServiceProvider extends ServiceProvider {
 
@@ -18,9 +19,33 @@ class UserServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->package('user', 'user');
+        
+        $this->app->register('Cartalyst\Sentry\SentryServiceProvider');
 	}
 
+	/**
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+        Route::get('login', array(
+            'uses' => 'Boyhagemann\User\Controller\AuthController@login',
+            'as' => 'user.login',
+        ));
+        
+        Route::post('auth', array(
+            'uses' => 'Boyhagemann\User\Controller\AuthController@auth',
+            'as' => 'user.auth',
+        ));
+        
+        Route::get('logout', array(
+            'uses' => 'Boyhagemann\User\Controller\AuthController@logout',
+            'as' => 'user.logout',
+        ));
+	}
+    
 	/**
 	 * Get the services provided by the provider.
 	 *
@@ -28,7 +53,7 @@ class UserServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('user');
 	}
 
 }
