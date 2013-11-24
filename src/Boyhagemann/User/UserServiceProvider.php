@@ -44,6 +44,16 @@ class UserServiceProvider extends ServiceProvider {
             'uses' => 'Boyhagemann\User\Controller\AuthController@logout',
             'as' => 'user.logout',
         ));
+        
+        Route::get('admin/permissions', array(
+            'uses' => 'Boyhagemann\User\Controller\PermissionController@index',
+            'as' => 'user.permissions',
+        ));
+        
+        Route::post('admin/permissions', array(
+            'uses' => 'Boyhagemann\User\Controller\PermissionController@save',
+            'as' => 'user.permissions.save',
+        ));
 	}
     
 	/**
