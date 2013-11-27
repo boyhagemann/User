@@ -5,13 +5,15 @@
         
 @foreach($permissionRepository->getPermissions() as $title => $permissions)
 
-<h2>{{ $title }}</h2>
+<div class="page-header">
+	<h2>{{ $title }}</h2>
+</div>
 
 <table class="table table-striped">
     
     <thead>
         <tr>            
-            <th class="col-lg-4"></th>
+            <th class="col-lg-6"></th>
 
             @foreach($groups as $group)
 
@@ -32,7 +34,7 @@
 
             @foreach($groups as $group)
 
-            <td class="">{{ Form::checkbox($permission . '[]', $group->id, isset($permissions[$group->id]) && in_array($permission, $permissions[$group->id])) }}</td>
+            <td class="">{{ Form::checkbox($permission . '[]', $group->id, isset($group->permissions[$permission]) && ($group->permissions[$permission] == 1)) }}</td>
 
             @endforeach
 

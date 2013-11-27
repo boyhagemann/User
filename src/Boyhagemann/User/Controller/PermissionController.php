@@ -21,12 +21,12 @@ class PermissionController extends \BaseController
         
         $groups = Sentry::findAllGroups();
         $permissions = array();
+
         foreach($groups as $group) {
             $permissions[$group->id] = $group->getPermissions();
         }
-        
-//        dd(\Form::checkbox('test' . '[]',1, in_array('edit.user', $permissions[1])));
-        
+
+
         return View::make('user::permissions', array(
             'permissionRepository' => $this->permissionRepository,
             'groups' => $groups,
@@ -44,7 +44,7 @@ class PermissionController extends \BaseController
             if(!is_array($allowed)) {
                 continue;
             }
-                        
+
             foreach($groups as $group) {
                 
                 $permission = str_replace('_', '.', $permission);
