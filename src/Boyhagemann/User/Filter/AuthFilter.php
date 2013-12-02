@@ -2,7 +2,7 @@
 
 namespace Boyhagemann\User\Filter;
 
-use Sentry;
+use Sentry, Redirect;
 
 class AuthFilter
 {
